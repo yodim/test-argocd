@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-custom-site
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-custom-site
+  template:
+    metadata:
+      labels:
+        app: nginx-custom-site
+    spec:
+      containers:
+        - name: nginx
+          image: mreferre/nginx-custom-site:latest
+          env:
+            - name: HTTP_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: nginx-site-secret
+                  key: HTTP_PORT
+            - name: INDEX_HTML_CONTENT
+              valueFrom:
+                configMapKeyRef:
+                  name: nginx-site-config
+                  key: INDEX_HTML_CONTENT
+          ports:
+            - containerPort: 8080
