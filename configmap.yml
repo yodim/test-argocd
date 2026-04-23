@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: nginx-site-config
 data:
-  INDEX_HTML_CONTENT: "<h1>Hello from Kubernetes!</h1><h2>SUD is the Best !</h2>"
+  INDEX_HTML_CONTENT: "<h1>Hello from Kubernetes!</h1><p>This is deployed using ArgoCD.</p>"
